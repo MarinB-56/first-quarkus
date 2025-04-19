@@ -4,8 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "cars")
 public class Car {
   // Auto incrémental
   @Id
@@ -16,6 +20,11 @@ public class Car {
   private String brand;
   private String color;
   private int yearOfProduction;
+
+  // Relation
+  @ManyToOne
+  @JoinColumn(name = "garage_id")
+  private Garage garage;
 
   // Constructeurs
   public Car(){}
@@ -58,5 +67,13 @@ public class Car {
 
   public void setYearOfProduction(int yearOfProduction) {
     this.yearOfProduction = yearOfProduction;
+  }
+
+  public Garage getGarage(){
+    return garage;
+  }
+
+  public void setGarage(Garage garage){
+    this.garage = garage;
   }
 }
